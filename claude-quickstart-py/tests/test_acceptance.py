@@ -14,7 +14,7 @@ import unittest
 from http.server import HTTPServer
 from urllib.request import urlopen
 from urllib.error import HTTPError
-from src.server import HelloHandler
+from src.server import Handler
 
 
 def _free_port() -> int:
@@ -27,7 +27,7 @@ class AcceptanceHTTPServerTest(unittest.TestCase):
     def setUp(self):
         self.host = "127.0.0.1"
         self.port = _free_port()
-        self.httpd = HTTPServer((self.host, self.port), HelloHandler)
+        self.httpd = HTTPServer((self.host, self.port), Handler)
         self.thread = threading.Thread(target=self.httpd.serve_forever, daemon=True)
         self.thread.start()
         time.sleep(0.05)
